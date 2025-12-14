@@ -103,11 +103,14 @@ export function ExportPanel({
       };
 
       try {
-        const resp = await fetch("http://localhost:8080/sign-pdf", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
+        const resp = await fetch(
+          `${import.meta.env.VITE_BACKEND_API_URL}/sign-pdf`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }
+        );
         const data = await resp.json().catch(() => null);
         results[key] = { ok: resp.ok, status: resp.status, data };
       } catch (err) {
